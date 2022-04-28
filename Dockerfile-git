@@ -8,6 +8,10 @@ RUN yarn install --registry=https://registry.npmmirror.com
 
 COPY . .
 
+RUN apk fix && \
+    apk --no-cache --update add git git-lfs less openssh && \
+    git lfs install
+
 CMD ["node", "index.js"]
 
 EXPOSE 3000

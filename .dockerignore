@@ -3,3 +3,5 @@ npm-debug.log
 .gitignore
 .git
 docker-compose.yml
+Dockerfile
+Dockerfile-git
