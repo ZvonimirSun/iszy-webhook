@@ -1,6 +1,13 @@
 name: Docker Build CI
 
 on:
+  label:
+    types:
+      - created
+  push:
+    branches:
+      - main
+      - "releases/**"
   workflow_dispatch:
 
 env:
