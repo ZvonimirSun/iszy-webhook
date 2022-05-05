@@ -8,6 +8,6 @@ RUN yarn install --registry=https://registry.npmmirror.com
 
 COPY . .
 
-CMD ["node", "index.js"]
+CMD ["node", "./build/index.js"]
 
 EXPOSE 3000

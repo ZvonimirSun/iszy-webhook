@@ -12,6 +12,6 @@ RUN apk fix && \
     apk --no-cache --update add git git-lfs less openssh && \
     git lfs install
 
-CMD ["node", "index.js"]
+CMD ["node", "./build/index.js"]
 
 EXPOSE 3000

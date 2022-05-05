@@ -1,19 +1,22 @@
-const express = require("express");
-const spawn = require("child_process").spawn;
-
-const app = express();
-const port = process.env.PORT || 3000;
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const child_process_1 = require("child_process");
+const app = (0, express_1.default)();
+const port = process.env.PORT ? parseInt(process.env.PORT) : 3000;
 const cmd = (process.env.CMD || "").split(" ");
-
-app.use(express.json());
+app.use(express_1.default.json());
 app.get("/", (req, res) => {
     res.send("Hello World!");
 });
-
 app.post("/", (req, res) => {
     if (!req.body) {
         return res.sendStatus(400);
-    } else {
+    }
+    else {
         req.body.ref = req.body.ref || "";
     }
     let hasTarget = false;
@@ -25,12 +28,13 @@ app.post("/", (req, res) => {
                 break;
             }
         }
-    } else {
+    }
+    else {
         hasTarget = true;
     }
     if (hasTarget) {
         if (cmd.length) {
-            const child = spawn(cmd[0], cmd.slice(1));
+            const child = (0, child_process_1.spawn)(cmd[0], cmd.slice(1));
             let resp = "\nTarget branch: " + req.body.ref.slice(11) + "\n";
             child.stdout.on("data", (buffer) => {
                 resp += buffer.toString();
@@ -39,15 +43,17 @@ app.post("/", (req, res) => {
                 console.log(resp);
                 res.send(resp);
             });
-        } else {
+        }
+        else {
             console.log("No command specified");
             res.send("No command specified");
         }
-    } else {
+    }
+    else {
         res.send("Nothing to do");
     }
 });
-
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 });
+//# sourceMappingURL=index.js.map
