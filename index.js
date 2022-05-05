@@ -31,7 +31,7 @@ app.post("/", (req, res) => {
     if (hasTarget) {
         if (cmd.length) {
             const child = spawn(cmd[0], cmd.slice(1));
-            let resp = "";
+            let resp = "\nTarget branch: " + req.body.ref.slice(11) + "\n";
             child.stdout.on("data", (buffer) => {
                 resp += buffer.toString();
             });
