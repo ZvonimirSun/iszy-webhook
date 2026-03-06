@@ -2,16 +2,14 @@ FROM node:alpine
 
 WORKDIR /usr/src/app
 
-COPY package*.json yarn.lock ./
-
-RUN yarn install --registry=https://registry.npmmirror.com
-
-COPY . .
+COPY package.json ./
+COPY node_modules ./node_modules
+COPY build ./build
 
 RUN apk fix && \
     apk --no-cache --update add git git-lfs less openssh && \
     git lfs install
 
-CMD ["node", "./build/index.js"]
-
 EXPOSE 3000
+
+CMD ["node", "./build/index.js"]
